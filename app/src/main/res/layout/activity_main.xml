@@ -6,14 +6,50 @@
     android:layout_height="match_parent"
     tools:context="io.mta.apo.MainActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="5">
 
+        <SurfaceView
+            android:id="@+id/svCamera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:background="@android:color/transparent">
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/btnRecents"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="recents searches button"
+                android:src="@drawable/ic_launcher_background"/>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/btnCapture"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="capture picture button"
+                android:src="@drawable/ic_launcher_background"/>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/btnSearchForm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="got to search form page button"
+                android:src="@drawable/ic_launcher_background"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
