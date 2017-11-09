@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Apo</string>
+    <string name="title_activity_recent_searches">RecentSearchesActivity</string>
 </resources>

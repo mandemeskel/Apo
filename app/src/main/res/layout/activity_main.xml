@@ -18,6 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"/>
 
+        <!-- Turn into a fragment -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -25,15 +26,15 @@
             android:weightSum="3"
             android:background="@android:color/transparent">
 
-            <android.support.v7.widget.AppCompatImageButton
-                android:id="@+id/btnRecents"
+            <ImageButton
+                android:id="@+id/btnRecentSearches"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="recents searches button"
                 android:src="@drawable/ic_launcher_background"/>
 
-            <android.support.v7.widget.AppCompatImageButton
+            <ImageButton
                 android:id="@+id/btnCapture"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -41,7 +42,7 @@
                 android:contentDescription="capture picture button"
                 android:src="@drawable/ic_launcher_background"/>
 
-            <android.support.v7.widget.AppCompatImageButton
+            <ImageButton
                 android:id="@+id/btnSearchForm"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
