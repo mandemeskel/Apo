@@ -3,7 +3,7 @@ package io.mta.apo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
-class RecentSearchsActivity : AppCompatActivity() {
+class RecentSearchesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

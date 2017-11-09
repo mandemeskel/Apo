@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
      * Goto to recent searches page
      */
     fun btnRecentSearchesClick() {
-        val intent: Intent = Intent(this, RecentSearchsActivity::class.java)
+        val intent: Intent = Intent(this, RecentSearchesActivity::class.java)
         startActivity(intent)
     }
 
