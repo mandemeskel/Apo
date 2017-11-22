@@ -12,6 +12,7 @@ import android.hardware.camera2.*
 class CameraHelper (val context: Context) {
     var camera_manager: CameraManager? = null
     var main_camera_id: String = ""
+    var camera_callback: CameraCallback? = null
 
     init {
 
@@ -24,6 +25,8 @@ class CameraHelper (val context: Context) {
         camera_manager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
         main_camera_id = this.getBackCamera()
+
+        camera_callback = CameraCallback()
 
     }
 
@@ -59,6 +62,43 @@ class CameraHelper (val context: Context) {
         }
 
         return ""
+    }
+
+    /**
+     * Let's us connect to the main camera.
+     */
+    fun openCamera() {
+        if(checkForPermission() == false)
+            throw Exception("Don't have camera permission");
+
+        // https://developer.android.com/reference/android/hardware/camera2/CameraManager.html#openCamera(java.lang.String, android.hardware.camera2.CameraDevice.StateCallback, android.os.Handler)
+        camera_manager?.openCamera(
+            main_camera_id,
+            // https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#CameraCaptureSession()
+            camera_callback,
+            // https://developer.android.com/reference/android/os/Handler.html
+            null
+        )
+    }
+
+    // https://developer.android.com/reference/android/hardware/camera2/CameraDevice.StateCallback.html
+    /**
+     * Handles camera state changes, this where we get the camera device
+     */
+    class CameraCallback: CameraDevice.StateCallback() {
+
+        override fun onDisconnected(p0: CameraDevice?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onError(p0: CameraDevice?, p1: Int) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onOpened(p0: CameraDevice?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
     }
 
     /**
