@@ -85,20 +85,34 @@ class CameraHelper (val context: Context) {
     /**
      * Handles camera state changes, this where we get the camera device
      */
-    class CameraCallback: CameraDevice.StateCallback() {
+    class CameraCallback(val surfaces: List<Surface>, val capture_session_callback: CameraCaptureSession.StateCallback): CameraDevice.StateCallback() {
 
-        override fun onDisconnected(p0: CameraDevice?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        override fun onDisconnected(camera: CameraDevice?) {
+            TODO("not implemented")
         }
 
-        override fun onError(p0: CameraDevice?, p1: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        override fun onError(camera: CameraDevice?, p1: Int) {
+            TODO("not implemented")
         }
 
-        override fun onOpened(p0: CameraDevice?) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        override fun onOpened(camera: CameraDevice?) {
+            camera?.createCaptureSession(
+                surfaces,
+                capture_session_callback,
+                null
+            )
         }
 
+    }
+
+    class CameraSessionCallback: CameraCaptureSession.StateCallback() {
+        override fun onConfigureFailed(session: CameraCaptureSession?) {
+
+        }
+
+        override fun onConfigured(sesson: CameraCaptureSession?) {
+
+        }
     }
 
     /**
