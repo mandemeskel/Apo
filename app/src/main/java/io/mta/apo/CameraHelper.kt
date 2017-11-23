@@ -9,10 +9,11 @@ import android.hardware.camera2.*
 /**
  * Created by Michael T. Andemeskel on 11/12/17.
  */
-class CameraHelper (val context: Context) {
+class CameraHelper (val context: Context, val surfaces: List<Surface>) {
     var camera_manager: CameraManager? = null
     var main_camera_id: String = ""
     var camera_callback: CameraCallback? = null
+    val session_callback: CameraSessionCallback = CameraSessionCallback()
 
     init {
 
@@ -26,7 +27,7 @@ class CameraHelper (val context: Context) {
 
         main_camera_id = this.getBackCamera()
 
-        camera_callback = CameraCallback()
+        camera_callback = CameraCallback(surfaces, session_callback as CameraCaptureSession.StateCallback)
 
     }
 
@@ -110,7 +111,7 @@ class CameraHelper (val context: Context) {
 
         }
 
-        override fun onConfigured(sesson: CameraCaptureSession?) {
+        override fun onConfigured(session: CameraCaptureSession?) {
 
         }
     }
