@@ -32,7 +32,7 @@ class MainActivityTests {
 
         // check that the page changed
         onView(
-                ViewMatchers.withId(R.id.svCamera)
+                ViewMatchers.withId(R.id.camera)
         ).check(ViewAssertions.doesNotExist())
 
         // check we are in recent searches page
@@ -50,7 +50,7 @@ class MainActivityTests {
 
         // check that the page changed
         onView(
-                ViewMatchers.withId(R.id.svCamera)
+                ViewMatchers.withId(R.id.camera)
         ).check(ViewAssertions.doesNotExist())
 
         // check we are in recent searches page
@@ -59,5 +59,21 @@ class MainActivityTests {
         ).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
+    @Test
+    fun btnCapture() {
+        // perform a click event
+        onView(
+                ViewMatchers.withId(R.id.btnCapture)
+        ).perform(ViewActions.click())
+
+        // check that the page has not changed i.e. cameraview is still there
+        onView(
+                ViewMatchers.withId(R.id.camera)
+        ).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // check that a picture has been taken
+        // TODO: how to test this without going into the innards of the code?
+
+    }
 
 }
