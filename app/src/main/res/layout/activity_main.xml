@@ -34,33 +34,21 @@
 
             <ImageButton
                 android:id="@+id/btnRecentSearches"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="center"
                 android:contentDescription="@string/btnRecentSearchesDsc"
-                android:src="@drawable/ic_restore_black_24dp"/>
+                android:src="@drawable/ic_restore_black_24dp"
+                style="@style/NavBarButtons"/>
 
             <ImageButton
                 android:id="@+id/btnCapture"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="center"
                 android:contentDescription="@string/btnCaptureDsc"
-                android:src="@drawable/ic_camera_black_24dp"/>
+                android:src="@drawable/ic_camera_black_24dp"
+                style="@style/NavBarButtons"/>
 
             <ImageButton
                 android:id="@+id/btnSearchForm"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="center"
                 android:contentDescription="@string/btnSearchFormDsc"
-                android:src="@drawable/ic_search_black_24dp"/>
+                android:src="@drawable/ic_search_black_24dp"
+                style="@style/NavBarButtons"/>
 
         </LinearLayout>
 
