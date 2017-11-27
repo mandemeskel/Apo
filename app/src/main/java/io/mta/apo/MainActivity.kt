@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import com.otaliastudios.cameraview.CameraView
 
 class MainActivity : AppCompatActivity() {
 
     private var btnRecentSearches: ImageButton? = null
     private var btnSearchForm: ImageButton? = null
     private var btnCapture: ImageButton? = null
+    private var camera: CameraHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,24 @@ class MainActivity : AppCompatActivity() {
             v -> onClick(v)
         }
 
+        val cameraView = findViewById<CameraView>(R.id.camera)
+        camera = CameraHelper(this, cameraView)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        camera?.cameraStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        camera?.cameraStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        camera?.cameraDestroy()
     }
 
     fun onClick(view: View) {
@@ -63,7 +83,7 @@ class MainActivity : AppCompatActivity() {
      * Take a picture
      */
     fun btnCaptureClick() {
-        // TODO
+        camera?.capture()
     }
 
 }

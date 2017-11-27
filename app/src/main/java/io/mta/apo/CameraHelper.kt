@@ -14,12 +14,12 @@ class CameraHelper (val context: Context, val camera: CameraView) {
     var camera_callback: CameraListener? = null
 
     init {
-
-        if(this.checkForPermission() == false)
-            throw Exception("Don't have camera permissions")
-
-        if(this.isCameraAvailable() == false)
-            throw Exception("No available camera")
+//
+//        if(this.checkForPermission() == false)
+//            throw Exception("Don't have camera permissions")
+//
+//        if(this.isCameraAvailable() == false)
+//            throw Exception("No available camera")
 
         camera_callback = CaptureListener()
         camera.addCameraListener(camera_callback)
@@ -71,5 +71,12 @@ class CameraHelper (val context: Context, val camera: CameraView) {
      */
     fun cameraDestroy() {
         camera.destroy()
+    }
+
+    /**
+     * Capture an image.
+     */
+    fun capture() {
+        camera.capturePicture()
     }
 }
