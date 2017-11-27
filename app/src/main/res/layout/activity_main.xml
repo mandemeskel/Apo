@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="io.mta.apo.MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,26 +17,29 @@
             android:keepScreenOn="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             app:cameraFacing="back"
             app:cameraSessionType="picture"
             app:cameraJpegQuality="100"
             />
 
-        <!-- Turn into a fragment -->
+        <!-- TODO: Turn into a fragment -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
             android:weightSum="3"
-            android:background="@android:color/transparent">
+            android:background="@color/colorNavBarBG">
 
             <ImageButton
                 android:id="@+id/btnRecentSearches"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="recents searches button"
+                android:background="@android:color/transparent"
+                android:scaleType="center"
+                android:contentDescription="@string/btnRecentSearchesDsc"
                 android:src="@drawable/ic_restore_black_24dp"/>
 
             <ImageButton
@@ -44,7 +47,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="capture picture button"
+                android:background="@android:color/transparent"
+                android:scaleType="center"
+                android:contentDescription="@string/btnCaptureDsc"
                 android:src="@drawable/ic_camera_black_24dp"/>
 
             <ImageButton
@@ -52,10 +57,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="got to search form page button"
+                android:background="@android:color/transparent"
+                android:scaleType="center"
+                android:contentDescription="@string/btnSearchFormDsc"
                 android:src="@drawable/ic_search_black_24dp"/>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
