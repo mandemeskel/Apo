@@ -55,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         camera?.cameraDestroy()
     }
 
+    /**
+     * Callback used when user responds to a permission request.
+     */
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        camera?.permissionHandler(requestCode, permissions, grantResults);
+    }
+
     fun onClick(view: View) {
         when(view.id) {
             R.id.btnRecentSearches -> btnRecentSearchesClick()
