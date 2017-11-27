@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Apo</string>
+    <string name="title_activity_recent_searches">RecentSearchesActivity</string>
+    <string name="btnRecentSearchesDsc">recent searches button</string>
+    <string name="btnCaptureDsc">capture picture button</string>
+    <string name="btnSearchFormDsc">goto search form button</string>
 </resources>
