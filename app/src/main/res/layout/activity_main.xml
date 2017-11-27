@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="recents searches button"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/ic_restore_black_24dp"/>
 
             <ImageButton
                 android:id="@+id/btnCapture"
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="capture picture button"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/ic_camera_black_24dp"/>
 
             <ImageButton
                 android:id="@+id/btnSearchForm"
@@ -53,7 +53,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="got to search form page button"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/ic_search_black_24dp"/>
 
         </LinearLayout>
 
