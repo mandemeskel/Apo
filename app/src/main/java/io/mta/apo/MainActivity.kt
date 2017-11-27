@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
             v -> onClick(v)
         }
 
+        (btnCapture as ImageButton).setColorFilter(resources.getColor(R.color.colorPrimary))
+
         val cameraView = findViewById<CameraView>(R.id.camera)
         camera = CameraHelper(this, cameraView)
 
