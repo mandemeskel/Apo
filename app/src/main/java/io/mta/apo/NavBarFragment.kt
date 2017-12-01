@@ -1,7 +1,7 @@
 package io.mta.apo
 
 import android.content.Context
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -17,11 +17,9 @@ import android.view.ViewGroup
    * Use the [NavBarFragment.newInstance] factory method to
    * create an instance of this fragment.
   */
-class NavBarFragment: Fragment() {
+class NavBarFragment: Fragment(), View.OnClickListener {
 
     private var currentActivity:String? = null
-
-    private var mListener:OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,37 +33,23 @@ class NavBarFragment: Fragment() {
         return inflater!!.inflate(R.layout.fragment_nav_bar, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null)
-            mListener!!.onFragmentInteraction(uri)
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener)
-            mListener = context
-        else
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
     }
 
     override fun onDetach() {
         super.onDetach()
-        mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri:Uri)
+    override fun onClick(view: View?) {
+        when (view!!.id) {
+            R.id.btnRecentSearches -> gotoRecentSearches()
+        }
+    }
+
+    private fun gotoRecentSearches() {
+        val intent = Intent(activity, RecentSearchesActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {
@@ -75,7 +59,7 @@ class NavBarFragment: Fragment() {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
-         * @param param1 Parameter 1.
+         * @param currentActivity The class name of the activity the fragment is in.
          * *
          * @return A new instance of fragment NavBarFragment.
          */
