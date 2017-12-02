@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 
 
@@ -22,6 +21,9 @@ import android.widget.ImageButton
   */
 class NavBarFragment: Fragment() {
     private val TAG: String = "NavBarFragment"
+    private val RECENT_SEARCHES_ACT: String = RecentSearchesActivity::class.java.toString()
+    private val MAIN_ACT: String = MainActivity::class.java.toString()
+    private val SEARCH_FORM_ACT: String = SearchFormActivity::class.java.toString()
     private var currentActivity:String? = null
 
     private val onBtnClick: View.OnClickListener = View.OnClickListener { view ->
@@ -54,27 +56,24 @@ class NavBarFragment: Fragment() {
     }
 
     private fun gotoRecentSearches() {
-        val recentSearchesAct = RecentSearchesActivity::class.java
-        if(currentActivity != recentSearchesAct.toString()) {
-            val intent = Intent(activity,recentSearchesAct )
+        if(currentActivity != RECENT_SEARCHES_ACT) {
+            val intent = Intent(activity, RecentSearchesActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun btnCaptureClick() {
-        val mainActivity = MainActivity::class.java
-        if(currentActivity == mainActivity.toString())
+        if(currentActivity == MAIN_ACT)
             // capture image
         else {
-            val intent = Intent(activity, mainActivity)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun gotoSearchForm() {
-        val searchActivity = SearchFormActivity::class.java
-        if(currentActivity != searchActivity.toString()) {
-            val intent = Intent(activity, searchActivity)
+        if(currentActivity != SEARCH_FORM_ACT) {
+            val intent = Intent(activity, SearchFormActivity::class.java)
             startActivity(intent)
         }
     }
@@ -107,9 +106,9 @@ class NavBarFragment: Fragment() {
         var btn: ImageButton? = null
 
         when(currentActivity) {
-            RecentSearchesActivity::class.java.toString() -> btn = fragment.findViewById<ImageButton>(R.id.btnRecentSearches)
-            MainActivity::class.java.toString() -> btn = fragment.findViewById<ImageButton>(R.id.btnCapture)
-            SearchFormActivity::class.java.toString() -> btn = fragment.findViewById<ImageButton>(R.id.btnSearchForm)
+            RECENT_SEARCHES_ACT -> btn = fragment.findViewById<ImageButton>(R.id.btnRecentSearches)
+            MAIN_ACT -> btn = fragment.findViewById<ImageButton>(R.id.btnCapture)
+            SEARCH_FORM_ACT -> btn = fragment.findViewById<ImageButton>(R.id.btnSearchForm)
         }
 
         // TODO: getColor is deprecated, replace
