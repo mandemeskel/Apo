@@ -4,9 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 
 
 /**
@@ -17,9 +20,17 @@ import android.view.ViewGroup
    * Use the [NavBarFragment.newInstance] factory method to
    * create an instance of this fragment.
   */
-class NavBarFragment: Fragment(), View.OnClickListener {
-
+class NavBarFragment: Fragment() {
+    private val TAG: String = "NavBarFragment"
     private var currentActivity:String? = null
+
+    private val onBtnClick: View.OnClickListener = View.OnClickListener { view ->
+        when (view.id) {
+            R.id.btnRecentSearches -> gotoRecentSearches()
+            R.id.btnCapture -> btnCaptureClick()
+            R.id.btnSearchForm -> gotoSearchForm()
+        }
+    }
 
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +41,10 @@ class NavBarFragment: Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
     savedInstanceState: Bundle?):View? {
-        return inflater!!.inflate(R.layout.fragment_nav_bar, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_nav_bar, container, false)
+        val btnRecentSearches = view!!.findViewById<ImageButton>(R.id.btnRecentSearches)
+        btnRecentSearches.setOnClickListener(onBtnClick)
+        return view
     }
 
     override fun onAttach(context: Context?) {
@@ -41,15 +55,32 @@ class NavBarFragment: Fragment(), View.OnClickListener {
         super.onDetach()
     }
 
-    override fun onClick(view: View?) {
-        when (view!!.id) {
-            R.id.btnRecentSearches -> gotoRecentSearches()
+    private fun gotoRecentSearches() {
+        Log.i(TAG, "btnRecentSearches pressed")
+        val recentSearchesAct = RecentSearchesActivity::class.java
+        Log.i(TAG, recentSearchesAct.toString())
+        if(currentActivity != recentSearchesAct.toString()) {
+            val intent = Intent(activity,recentSearchesAct )
+            startActivity(intent)
         }
     }
 
-    private fun gotoRecentSearches() {
-        val intent = Intent(activity, RecentSearchesActivity::class.java)
-        startActivity(intent)
+    private fun btnCaptureClick() {
+        val mainActivity = MainActivity::class.java
+        if(currentActivity == mainActivity.toString())
+            // capture image
+        else {
+            val intent = Intent(activity, mainActivity)
+            startActivity(intent)
+        }
+    }
+
+    private fun gotoSearchForm() {
+        val searchActivity = SearchFormActivity::class.java
+        if(currentActivity != searchActivity.toString()) {
+            val intent = Intent(activity, searchActivity)
+            startActivity(intent)
+        }
     }
 
     companion object {
