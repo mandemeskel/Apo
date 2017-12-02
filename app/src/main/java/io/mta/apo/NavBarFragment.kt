@@ -34,14 +34,14 @@ class NavBarFragment: Fragment() {
 
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
-        currentActivity = activity.toString()
+        currentActivity = activity::class.java.toString()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
     savedInstanceState: Bundle?):View? {
         val view = inflater!!.inflate(R.layout.fragment_nav_bar, container, false)
         setUpEventListeners(view)
-        setUpUI()
+        setUpUI(view)
         return view
     }
 
@@ -54,9 +54,7 @@ class NavBarFragment: Fragment() {
     }
 
     private fun gotoRecentSearches() {
-        Log.i(TAG, "btnRecentSearches pressed")
         val recentSearchesAct = RecentSearchesActivity::class.java
-        Log.i(TAG, recentSearchesAct.toString())
         if(currentActivity != recentSearchesAct.toString()) {
             val intent = Intent(activity,recentSearchesAct )
             startActivity(intent)
@@ -95,17 +93,28 @@ class NavBarFragment: Fragment() {
         }
     }
 
-    private fun setUpEventListeners(view: View) {
-        val btnRecentSearches = view.findViewById<ImageButton>(R.id.btnRecentSearches)
-        val btnCapture = view.findViewById<ImageButton>(R.id.btnCapture)
-        val btnSearchForm = view.findViewById<ImageButton>(R.id.btnSearchForm)
+    private fun setUpEventListeners(fragment: View) {
+        val btnRecentSearches = fragment.findViewById<ImageButton>(R.id.btnRecentSearches)
+        val btnCapture = fragment.findViewById<ImageButton>(R.id.btnCapture)
+        val btnSearchForm = fragment.findViewById<ImageButton>(R.id.btnSearchForm)
 
         btnRecentSearches.setOnClickListener(onBtnClick)
         btnCapture.setOnClickListener(onBtnClick)
         btnSearchForm.setOnClickListener(onBtnClick)
     }
 
-    private fun setUpUI() {
-        // TODO
+    private fun setUpUI(fragment: View) {
+        var btn: ImageButton? = null
+
+        when(currentActivity) {
+            RecentSearchesActivity::class.java.toString() -> btn = fragment.findViewById<ImageButton>(R.id.btnRecentSearches)
+            MainActivity::class.java.toString() -> btn = fragment.findViewById<ImageButton>(R.id.btnCapture)
+            SearchFormActivity::class.java.toString() -> btn = fragment.findViewById<ImageButton>(R.id.btnSearchForm)
+        }
+
+        // TODO: getColor is deprecated, replace
+        // set btn color to blue
+        if(btn != null)
+            btn.setColorFilter(resources.getColor(R.color.colorPrimary))
     }
 }
