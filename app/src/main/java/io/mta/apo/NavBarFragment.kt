@@ -34,21 +34,14 @@ class NavBarFragment: Fragment() {
 
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
-        if (getArguments() != null) {
-            currentActivity = getArguments().getString(ARG_PARAM1)
-        }
+        currentActivity = activity.toString()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
     savedInstanceState: Bundle?):View? {
         val view = inflater!!.inflate(R.layout.fragment_nav_bar, container, false)
-        val btnRecentSearches = view!!.findViewById<ImageButton>(R.id.btnRecentSearches)
-        val btnCapture = view!!.findViewById<ImageButton>(R.id.btnCapture)
-        val btnSearchForm = view!!.findViewById<ImageButton>(R.id.btnSearchForm)
-
-        btnRecentSearches.setOnClickListener(onBtnClick)
-        btnCapture.setOnClickListener(onBtnClick)
-        btnSearchForm.setOnClickListener(onBtnClick)
+        setUpEventListeners(view)
+        setUpUI()
         return view
     }
 
@@ -89,23 +82,30 @@ class NavBarFragment: Fragment() {
     }
 
     companion object {
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "current_activity"
-
         /**
          * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         * @param currentActivity The class name of the activity the fragment is in.
-         * *
+         * this fragment using the provided parameters
+         *
          * @return A new instance of fragment NavBarFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(currentActivity: String): NavBarFragment {
+        fun newInstance(): NavBarFragment {
             val fragment = NavBarFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, currentActivity)
-            fragment.arguments = args
             return fragment
         }
+    }
+
+    private fun setUpEventListeners(view: View) {
+        val btnRecentSearches = view.findViewById<ImageButton>(R.id.btnRecentSearches)
+        val btnCapture = view.findViewById<ImageButton>(R.id.btnCapture)
+        val btnSearchForm = view.findViewById<ImageButton>(R.id.btnSearchForm)
+
+        btnRecentSearches.setOnClickListener(onBtnClick)
+        btnCapture.setOnClickListener(onBtnClick)
+        btnSearchForm.setOnClickListener(onBtnClick)
+    }
+
+    private fun setUpUI() {
+        // TODO
     }
 }
