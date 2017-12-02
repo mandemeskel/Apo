@@ -43,7 +43,12 @@ class NavBarFragment: Fragment() {
     savedInstanceState: Bundle?):View? {
         val view = inflater!!.inflate(R.layout.fragment_nav_bar, container, false)
         val btnRecentSearches = view!!.findViewById<ImageButton>(R.id.btnRecentSearches)
+        val btnCapture = view!!.findViewById<ImageButton>(R.id.btnCapture)
+        val btnSearchForm = view!!.findViewById<ImageButton>(R.id.btnSearchForm)
+
         btnRecentSearches.setOnClickListener(onBtnClick)
+        btnCapture.setOnClickListener(onBtnClick)
+        btnSearchForm.setOnClickListener(onBtnClick)
         return view
     }
 
