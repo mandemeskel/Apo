@@ -74,6 +74,12 @@ class MainActivityTests {
         // check that a picture has been taken
         // TODO: how to test this without going into the innards of the code?
 
+        // check the btn is blue i.e. primary
+        // NOTE: ColorFilter's constructor is deprecated, no way of making one?
+//        onView(
+//                ViewMatchers.withId(R.id.btnCapture)
+//        ).check(ViewAssertions.matches(withColorFilter(R.color.colorPrimary)))
+
     }
 
 }
