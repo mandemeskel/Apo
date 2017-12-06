@@ -18,7 +18,6 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
 
     // companion object to host static functions and properties
     companion object Handler {
-
         /**
          * Loads saved pills from recent searches list
          */
