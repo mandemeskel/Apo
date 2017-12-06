@@ -12,7 +12,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
     /**
      * Saves pill to recent searches list.
      */
-    fun savePill() {
+    fun save() {
         // TODO
     }
 
@@ -20,11 +20,19 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
     companion object Handler {
         /**
          * Loads saved pills from recent searches list
+         * @return a array of pills searched by the user
          */
-        fun loadSavedPills(): Array<Pill>? {
+        fun loadSavedPills(): Array<Pill> {
             // TODO
-            var pills: Array<Pill>? = null
+            var pills: Array<Pill> = arrayOf()
             return pills
+        }
+
+        /**
+         * Clear the user's saved pills
+         */
+        fun clearSavedPills() {
+            // TODO
         }
 
 
