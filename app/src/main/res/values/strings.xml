@@ -4,4 +4,5 @@
     <string name="btnRecentSearchesDsc">recent searches button</string>
     <string name="btnCaptureDsc">capture picture button</string>
     <string name="btnSearchFormDsc">goto search form button</string>
+    <string name="recent_searches">Recent Searches</string>
 </resources>

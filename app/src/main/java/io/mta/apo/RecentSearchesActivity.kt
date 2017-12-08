@@ -8,10 +8,14 @@ class RecentSearchesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recent_searchs)
+        setContentView(R.layout.activity_recent_searches)
 
+        // enable toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        // enable up button
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
     }
 }

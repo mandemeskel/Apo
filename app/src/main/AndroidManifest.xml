@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecentSearchesActivity" />
+        <activity android:name=".RecentSearchesActivity"
+            android:label="@string/recent_searches"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".SearchFormActivity"></activity>
     </application>
 
