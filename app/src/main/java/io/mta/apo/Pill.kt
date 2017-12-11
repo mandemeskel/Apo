@@ -35,13 +35,25 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
         // TODO
     }
 
-    // companion object to host static functions and properties
+    /**
+     * Companion object to host static functions and properties.
+     *
+     * @property DB_NAME the name of the database
+     * @property TABLE_NAME the name of the table that hosts the pill info
+     * @property db an AppDatabase object for connecting to the database
+     * @property save_entities a list of entities that we will save
+     */
     companion object Handler {
         const val DB_NAME: String = "apo_db"
         const val TABLE_NAME: String = "pills"
         private var db: AppDatabase? = null
-        private val entities: MutableList<PillEntity> = mutableListOf()
+        private val save_entities: MutableList<PillEntity> = mutableListOf()
 
+        /**
+         * Creates a AppDatabase instance if one does not already exist and returns a instance of PillDao for running database queries.
+         * @param context the context of the calling activity
+         * @return the pill data access object, an instance of PillDao
+         */
         fun initDb(context: Context): PillDao {
             if(db == null)
                 db = Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME).build()
@@ -55,8 +67,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         fun loadSavedPills(context: Context): Array<PillEntity> {
             val db = initDb(context)
-            val results = db.getAllPills()
-            return results
+            return db.getAllPills()
         }
 
         /**
@@ -64,7 +75,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         fun clearSavedPills(context: Context) {
             val db = initDb(context)
-            return db.deleteAllPills()
+            db.deleteAllPills()
         }
 
         /**
@@ -80,13 +91,13 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
         }
 
         /**
-         * Saves the pills stored in entities i.e. Pill::save() saved pills to the database and clears the entities list.
+         * Saves the pills stored in save_entities i.e. Pill::save() saved pills to the database and clears the save_entities list.
          * @param context the context of the calling activity
          */
         fun savePills(context: Context) {
             val db = initDb(context)
-            db.insertPills(entities as Array<PillEntity>)
-            entities.clear()
+            db.insertPills(save_entities as Array<PillEntity>)
+            save_entities.clear()
         }
 
     }
