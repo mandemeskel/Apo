@@ -7,15 +7,31 @@ import android.content.Context
  * Created by Michael T. Andemeskel on 12/5/17.
  */
 class Pill (val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
+    val entity = PillEntity(brand_name, medical_name, img_path, description)
 
     init {
         // TODO
     }
 
     /**
-     * Saves pill to recent searches list.
+     * Does not actually saves the pill, it just adds it to a list of pills that will be saved en masse.
      */
     fun save() {
+        // TODO
+    }
+
+    /**
+     * Returns the image associated with this pill.
+     * @return TODO: IDK, if this should be a path or resource id or whatever
+     */
+    fun getImage() {
+        // TODO
+    }
+
+    /**
+     * Saves image of the pill onto phone for later use.
+     */
+    fun saveImage() {
         // TODO
     }
 
@@ -24,6 +40,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
         const val DB_NAME: String = "apo_db"
         const val TABLE_NAME: String = "pills"
         private var db: AppDatabase? = null
+        private val entities: MutableList<PillEntity> = mutableListOf()
 
         fun initDb(context: Context): PillDao {
             if(db == null)
@@ -49,6 +66,29 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
             val db = initDb(context)
             return db.deleteAllPills()
         }
+
+        /**
+         * Save passed pills to the database
+         * @param pills an array of pills to save
+         * @param context the context of the calling activity
+         */
+        fun savePills(pills: Array<Pill>, context: Context) {
+            val db = initDb(context)
+            val entities: MutableList<PillEntity> = mutableListOf()
+            pills.map { pill -> entities.add(pill.entity) }
+            db.insertPills(entities as Array<PillEntity>)
+        }
+
+        /**
+         * Saves the pills stored in entities i.e. Pill::save() saved pills to the database and clears the entities list.
+         * @param context the context of the calling activity
+         */
+        fun savePills(context: Context) {
+            val db = initDb(context)
+            db.insertPills(entities as Array<PillEntity>)
+            entities.clear()
+        }
+
     }
 
     @Entity(tableName = Pill.TABLE_NAME)
@@ -63,6 +103,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
      * A data access object, this interface which will be implemented by the room service and the doa object it is a part of will be called when making queries on the database.
      *
      * @property insertPill inserts a single pill entity into the database
+     * @property insertPills inserts multiple pill entities into the database
      * @property getAllPills queries the pills table and returns all the pills in it
      * @property deletePills delete an array pills passed to the function
      * @property deleteAllPills delete all the pills inn the pills table
@@ -75,6 +116,13 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insertPill(pill: PillEntity)
+
+        /**
+         * Inserts an array of pills into the database, if a pill already exists replace it...
+         * @param pills the array of PillEntities to be inserted into the database
+         */
+        @Insert(onConflict = OnConflictStrategy.REPLACE)
+        fun insertPills(pills: Array<PillEntity>)
 
         /**
          * Queries the db for all pills and returns the results.
