@@ -50,7 +50,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
         const val DB_NAME: String = "apo_db"
         const val TABLE_NAME: String = "pills"
         private var db: AppDatabase? = null
-        private val save_entities: MutableList<PillEntity> = mutableListOf()
+        private val save_entities: MutableSet<PillEntity> = mutableSetOf()
 
         /**
          * Creates a AppDatabase instance if one does not already exist and returns a instance of PillDao for running database queries.
@@ -88,7 +88,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         fun savePills(pills: Array<Pill>, context: Context) {
             val db = initDb(context)
-            val entities: MutableList<PillEntity> = mutableListOf()
+            val entities: MutableSet<PillEntity> = mutableSetOf()
             pills.map { pill -> entities.add(pill.entity) }
             db.insertPills(entities as Array<PillEntity>)
         }
@@ -99,8 +99,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         fun savePills(context: Context) {
             val db = initDb(context)
-            val entities = save_entities.toSet()
-            db.insertPills(entities as Array<PillEntity>)
+            db.insertPills(save_entities as Array<PillEntity>)
             save_entities.clear()
         }
 
