@@ -1,6 +1,7 @@
 package io.mta.apo
 
 import android.arch.persistence.room.*
+import android.content.Context
 
 /**
  * Created by Michael T. Andemeskel on 12/5/17.
@@ -20,23 +21,33 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
 
     // companion object to host static functions and properties
     companion object Handler {
+        const val DB_NAME: String = "apo_db"
         const val TABLE_NAME: String = "pills"
+        private var db: AppDatabase? = null
+
+        fun initDb(context: Context): PillDao {
+            if(db == null)
+                db = Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME).build()
+
+            return db!!.pillDao()
+        }
 
         /**
          * Loads saved pills from recent searches list
          * @return a array of pills searched by the user
          */
-        fun loadSavedPills(): Array<Pill> {
-            // TODO
-            var pills: Array<Pill> = arrayOf()
-            return pills
+        fun loadSavedPills(context: Context): Array<PillEntity> {
+            val db = initDb(context)
+            val results = db.getAllPills()
+            return results
         }
 
         /**
          * Clear the user's saved pills
          */
-        fun clearSavedPills() {
-            // TODO
+        fun clearSavedPills(context: Context) {
+            val db = initDb(context)
+            return db.deleteAllPills()
         }
     }
 
