@@ -18,21 +18,21 @@ interface PillDao {
      * @param pill the PillEntity to be inserted into the database
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPill(pill: Pill.PillEntity)
+    fun insertPill(pill: PillEntity)
 
     /**
      * Inserts an array of pills into the database, if a pill already exists replace it...
      * @param pills the array of PillEntities to be inserted into the database
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPills(pills: Array<Pill.PillEntity>)
+    fun insertPills(pills: Array<PillEntity>)
 
     /**
      * Queries the db for all pills and returns the results.
      * @return an array of pill entities
      */
     @Query("SELECT * FROM ${Pill.TABLE_NAME}")
-    fun getAllPills(): Array<Pill.PillEntity>
+    fun getAllPills(): Array<PillEntity>
 
     /**
      * Deletes the provided list of pill entities from pills table.
@@ -40,7 +40,7 @@ interface PillDao {
      * @return int, the number of pills deleted
      */
     @Delete
-    fun deletePills(pills: Array<Pill.PillEntity>): Int
+    fun deletePills(pills: Array<PillEntity>): Int
 
     /**
      * Delete all the pills in the pills table.

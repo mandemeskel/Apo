@@ -11,7 +11,7 @@ import android.arch.persistence.room.RoomDatabase
  *
  * @property pillDao the pill database accessor object so we can query the pill table
  */
-@Database(entities = [Pill.PillEntity::class], version = 1)
+@Database(entities = [PillEntity::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
-    abstract fun pillDao(): Pill.PillDao
+    abstract fun pillDao(): PillDao
 }
