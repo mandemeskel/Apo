@@ -102,11 +102,5 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
 
     }
 
-    @Entity(tableName = Pill.TABLE_NAME)
-    class PillEntity(val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
-        @PrimaryKey(autoGenerate = true)
-        var id: Int? = null
-        // TODO: should be img_path be a foreign-key, will there be more than one image per pill?
 
-    }
 }
