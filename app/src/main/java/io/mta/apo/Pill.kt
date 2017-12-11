@@ -1,5 +1,9 @@
 package io.mta.apo
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
 /**
  * Created by Michael T. Andemeskel on 12/5/17.
  */
@@ -34,7 +38,13 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
         fun clearSavedPills() {
             // TODO
         }
+    }
 
+    @Entity(tableName = "pills")
+    class PillEntity(val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
+        @PrimaryKey(autoGenerate = true)
+        var id: Int? = null
+        // TODO: should be img_path be a foreign-key, will there be more than one image per pill?
 
     }
 }
