@@ -8,6 +8,7 @@ import android.content.Context
  */
 class Pill (val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
     val entity = PillEntity(brand_name, medical_name, img_path, description)
+    var saved = false
 
     init {
         // TODO
@@ -17,7 +18,9 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
      * Does not actually saves the pill, it just adds it to a list of pills that will be saved en masse.
      */
     fun save() {
-        // TODO
+        if(saved) return Unit
+        saved = true
+        Pill.save_entities.add(this.entity)
     }
 
     /**
@@ -96,7 +99,8 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         fun savePills(context: Context) {
             val db = initDb(context)
-            db.insertPills(save_entities as Array<PillEntity>)
+            val entities = save_entities.toSet()
+            db.insertPills(entities as Array<PillEntity>)
             save_entities.clear()
         }
 
