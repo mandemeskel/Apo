@@ -22,7 +22,7 @@ import java.net.URLEncoder
 class Server {
 
     // API constants
-    val SERVER_URL = "http://138.68.251.88/"
+    val SERVER_URL = "http://165.227.30.127/"
     val API = "api/"
     val API_VERSION = "1/"
     val PILL="pill/"
