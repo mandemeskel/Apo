@@ -64,6 +64,13 @@ class PillTests {
     }
 
     @Test
+    fun loadSavedPillsWithEmptyPillsTable() {
+        Pill.clearSavedPills(context)
+        val saved_pills = Pill.loadSavedPills(context)
+        assertThat("loadSavedPills should return an empty array when the pills table is empty", saved_pills.size == 0)
+    }
+
+    @Test
     fun savePills() {
         val num_new_pills = 5
         val pills = Array<Pill>(num_new_pills, { id -> Pill(id, "", "", "", "")})
