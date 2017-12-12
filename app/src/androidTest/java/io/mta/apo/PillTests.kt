@@ -83,8 +83,8 @@ class PillTests {
         val pill = Pill(pill_id, pill_brand_name, pill_medical_name, pill_img_path, pill_description)
         pill.save()
         Pill.savePills(context)
-        val new_pill = Pill.loadSavedPills(context).last()
-        assertThat("new pill should overwritte old pill data", old_pill.date_last_searched != new_pill.date_last_searched)
+        val new_pill = Pill.loadSavedPills(context).first()
+        assertThat("new pill should overwrite old pill data", old_pill.date_last_searched != new_pill.date_last_searched)
     }
 
 }
