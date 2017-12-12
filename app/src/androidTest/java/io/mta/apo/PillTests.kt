@@ -27,18 +27,18 @@ class PillTests {
     val context = InstrumentationRegistry.getTargetContext()
 
     @Before
-    fun save_test_pill() {
+    fun saveTestPill() {
         test_pill.save()
         Pill.savePills(context)
     }
 
     @After
-    fun clear_saved_pills() {
+    fun clearPillsTable() {
         Pill.clearSavedPills(context)
     }
 
     @Test
-    fun pill_from_database_is_correct() {
+    fun pillFromDatabaseIntegrity() {
         val saved_pills = Pill.loadSavedPills(context)
         val pill = saved_pills.first()
         assertThat("Pill has the correct id", pill.id == pill_id)
@@ -50,21 +50,21 @@ class PillTests {
     }
 
     @Test
-    fun pill_can_be_saved_and_loaded() {
+    fun loadSavedPills() {
         val saved_pills = Pill.loadSavedPills(context)
         val found = saved_pills.filter { pill -> pill.id == test_pill.entity.id }
-        assertThat("loadSavedPills returns a list of pills that contains saved pill.", found.size == 1)
+        assertThat("loadSavedPills returns a list of pills that contains saved pill", found.size == 1)
     }
 
     @Test
-    fun saved_pills_can_be_cleared() {
+    fun clearSavedPills() {
         Pill.clearSavedPills(context)
         val saved_pills = Pill.loadSavedPills(context)
         assertThat("clearSavedPills clears the pills table", saved_pills.isEmpty() == true)
     }
 
     @Test
-    fun testSavePills() {
+    fun savePills() {
         val num_new_pills = 5
         val pills = Array<Pill>(num_new_pills, { id -> Pill(id, "", "", "", "")})
         val old_pills = Pill.loadSavedPills(context)
