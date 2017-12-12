@@ -1,7 +1,6 @@
 package io.mta.apo
 
 import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
 import java.util.*
 
 /**
@@ -13,7 +12,7 @@ import java.util.*
  * @param img_path the path to the img for this pill, can be a remote or local path
  */
 @Entity(tableName = Pill.TABLE_NAME, primaryKeys = ["id"])
-public class PillEntity(var id: Int, var brand_name: String, var medical_name: String, var img_path: String, var description: String) {
+class PillEntity(var id: Int, var brand_name: String, var medical_name: String, var img_path: String, var description: String) {
 
     constructor(id: Int): this(id, "", "", "", "") {
     }
