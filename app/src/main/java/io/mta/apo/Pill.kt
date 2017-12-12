@@ -88,9 +88,9 @@ class Pill (val id: Int, val brand_name: String, val medical_name: String, val i
          */
         fun savePills(pills: Array<Pill>, context: Context) {
             val db = initDb(context)
-            val entities: MutableSet<PillEntity> = mutableSetOf()
-            pills.map { pill -> entities.add(pill.entity) }
-            db.insertPills(entities as Array<PillEntity>)
+            for( pill in pills )
+                pill.save()
+            savePills(context)
         }
 
         /**
