@@ -87,7 +87,6 @@ class Pill (val id: Int, val brand_name: String, val medical_name: String, val i
          * @param context the context of the calling activity
          */
         fun savePills(pills: Array<Pill>, context: Context) {
-            val db = initDb(context)
             for( pill in pills )
                 pill.save()
             savePills(context)
