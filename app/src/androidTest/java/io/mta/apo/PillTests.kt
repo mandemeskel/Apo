@@ -9,6 +9,7 @@ import org.junit.After
 import org.junit.Test
 import org.junit.Before
 import org.junit.runner.RunWith
+import java.util.*
 
 /**
  * Created by Michael T. Andemeskel on 12/5/17.
@@ -45,6 +46,7 @@ class PillTests {
         assertThat("Pill has has the correct medical name", pill.medical_name == pill_medical_name)
         assertThat("Pill has the correct image path", pill.img_path == pill_img_path)
         assertThat("Pill has the correct brand name", pill.description == pill_description)
+        assertThat("Pill has a last searched date in the past", pill.date_last_searched < Date())
     }
 
     @Test
@@ -73,6 +75,16 @@ class PillTests {
 
         for( pill in pills )
             assertThat("pills should be updated to show that they have been saved", pill.saved == true)
+    }
+
+    @Test
+    fun savingPillTwice() {
+        val old_pill = Pill.loadSavedPills(context).first()
+        val pill = Pill(pill_id, pill_brand_name, pill_medical_name, pill_img_path, pill_description)
+        pill.save()
+        Pill.savePills(context)
+        val new_pill = Pill.loadSavedPills(context).last()
+        assertThat("new pill should overwritte old pill data", old_pill.date_last_searched != new_pill.date_last_searched)
     }
 
 }
