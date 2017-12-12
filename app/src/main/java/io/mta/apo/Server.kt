@@ -44,6 +44,14 @@ class Server {
         return SERVER_URL + API + API_VERSION
     }
 
+    /**
+     * Returns the whole url to the current version of the pill endpoint
+     * @return a url for the pill endpoint
+     */
+    fun getPillEndpoint(): String {
+        return SERVER_URL + API + API_VERSION + PILL + SEARCH
+    }
+
     // TODO: pass query object not user input
     fun queryServer(shape:String, imprint:String, color:String): String {
         Log.i( "Server::queryServer", "queryServer called" )
@@ -67,7 +75,7 @@ class Server {
      * @param {string} color - The color on the pill
      */
     fun getPillSearchUrl(name:String,imprint: String,color: String):String{
-        var url = getAPIUrl() + PILL + SEARCH
+        var url = getPillEndpoint()
         if(!name.isEmpty()){
             url += MEDICINE_NAME + name
         }
