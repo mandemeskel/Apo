@@ -1,16 +1,19 @@
 package io.mta.apo
 
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
-import org.junit.platform.runner.JUnitPlatform
-import org.junit.runner.RunWith
 
-@RunWith(JUnitPlatform::class)
 class ServerTests {
+    val pill_name = "Advil"
+    val pill_imprint = "A"
+    val pill_color = "white"
     val server = Server()
 
     @Test
     fun getPillSearchUrl() {
-        // TODO: should return the correct url
+        val expected_url = server.getPillEndpoint() + server.MEDICINE_NAME + pill_name + server.IMPRINT + pill_imprint + server.COLOR + pill_color
+        val url = server.getPillSearchUrl(pill_name, pill_imprint, pill_color)
+        assertThat("getPillSearchUrl should return a properly formated url", expected_url == url)
     }
 
     @Test
