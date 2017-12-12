@@ -27,7 +27,8 @@ class PillTests {
 
     @Before
     fun save_test_pill() {
-        // TODO
+        test_pill.save()
+        Pill.savePills(context)
     }
 
     @After
@@ -36,9 +37,18 @@ class PillTests {
     }
 
     @Test
+    fun pill_from_database_is_correct() {
+        val saved_pills = Pill.loadSavedPills(context)
+        val pill = saved_pills.first()
+        assertThat("Pill has the correct id", pill.id == pill_id)
+        assertThat("Pill has the correct brand name", pill.brand_name == pill_brand_name)
+        assertThat("Pill has has the correct medical name", pill.medical_name == pill_medical_name)
+        assertThat("Pill has the correct image path", pill.img_path == pill_img_path)
+        assertThat("Pill has the correct brand name", pill.description == pill_description)
+    }
+
+    @Test
     fun pill_can_be_saved_and_loaded() {
-        test_pill.save()
-        Pill.savePills(context)
         val saved_pills = Pill.loadSavedPills(context)
         val found = saved_pills.filter { pill -> pill.id == test_pill.entity.id }
         assertThat("loadSavedPills returns a list of pills that contains saved pill.", found.size == 1)
