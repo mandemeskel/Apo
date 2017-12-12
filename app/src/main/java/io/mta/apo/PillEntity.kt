@@ -7,23 +7,20 @@ import java.util.*
 /**
  * This actual object that gets saved into the database, the properties are the column names and values.
  *
+ * @param id the pill id passed with the pill data from the server
  * @param brand_name the layman name of the pill e.g. advil, tylenol
  * @param medical_name the jargon name of the pill e.g. ibuprofen
  * @param img_path the path to the img for this pill, can be a remote or local path
  */
-@Entity(tableName = Pill.TABLE_NAME)
-class PillEntity(val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
+@Entity(tableName = Pill.TABLE_NAME, primaryKeys = ["id"])
+public class PillEntity(var id: Int, var brand_name: String, var medical_name: String, var img_path: String, var description: String) {
 
-    /**
-     * This is an auto-generated primary key for the pill.
-     * TODO: replace this with the pillID passed from the server
-     */
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null
+    constructor(id: Int): this(id, "", "", "", "") {
+    }
 
     /**
      * The date that the user last searched for the pill, which is set when this entity is created i.e. when the pill is created and saved into the database.
      */
-    val date_last_searched: Date = Date()
+    var date_last_searched: Date = Date()
 
 }

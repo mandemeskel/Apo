@@ -6,8 +6,8 @@ import android.content.Context
 /**
  * Created by Michael T. Andemeskel on 12/5/17.
  */
-class Pill (val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
-    val entity = PillEntity(brand_name, medical_name, img_path, description)
+class Pill (val id: Int, val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
+    val entity = PillEntity(id, brand_name, medical_name, img_path, description)
     var saved = false
 
     init {
@@ -99,7 +99,7 @@ class Pill (val brand_name: String, val medical_name: String, val img_path: Stri
          */
         fun savePills(context: Context) {
             val db = initDb(context)
-            db.insertPills(save_entities as Array<PillEntity>)
+            db.insertPills(save_entities.toTypedArray())
             save_entities.clear()
         }
 
