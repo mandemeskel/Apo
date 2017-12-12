@@ -12,7 +12,10 @@ import java.util.*
  * @param img_path the path to the img for this pill, can be a remote or local path
  */
 @Entity(tableName = Pill.TABLE_NAME)
-class PillEntity(val brand_name: String, val medical_name: String, val img_path: String, val description: String) {
+public class PillEntity(var brand_name: String, var medical_name: String, var img_path: String, var description: String) {
+
+    constructor(): this("", "", "", "") {
+    }
 
     /**
      * This is an auto-generated primary key for the pill.
@@ -24,6 +27,6 @@ class PillEntity(val brand_name: String, val medical_name: String, val img_path:
     /**
      * The date that the user last searched for the pill, which is set when this entity is created i.e. when the pill is created and saved into the database.
      */
-    val date_last_searched: Date = Date()
+    var date_last_searched: Date = Date()
 
 }

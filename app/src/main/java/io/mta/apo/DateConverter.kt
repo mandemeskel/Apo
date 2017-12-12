@@ -6,7 +6,7 @@ import java.util.*
 /**
  * A converter class that will allow us to use date column in an entity. This class basicaly converts date object in the entity into a primitive that can be saved the Room library.
  */
-object DateConverter {
+class DateConverter {
 
     /**
      * Converts milliseconds into a date object which is returned.
