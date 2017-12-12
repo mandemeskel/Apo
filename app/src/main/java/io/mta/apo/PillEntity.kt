@@ -2,7 +2,6 @@ package io.mta.apo
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import java.text.DateFormat
 import java.util.*
 
 /**
@@ -23,8 +22,8 @@ class PillEntity(val brand_name: String, val medical_name: String, val img_path:
     var id: Int? = null
 
     /**
-     * The current date formatted for US locale with a MM.DD.YY HH:MMpm format. US locale for uniformity in the database regardless of where the user is.
+     * The date that the user last searched for the pill, which is set when this entity is created i.e. when the pill is created and saved into the database.
      */
-    val date_last_searched: String = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US).format(Date())
+    val date_last_searched: Date = Date()
 
 }
