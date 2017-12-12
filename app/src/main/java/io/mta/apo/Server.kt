@@ -13,6 +13,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import org.json.JSONObject
 import org.json.JSONStringer
+import java.net.URLEncoder
 
 /**
  * From jgonzalezcastello:
@@ -36,6 +37,9 @@ class Server {
     // okhttp constants
     val JSON:MediaType = MediaType.parse("application/json; charset=utf-8")!! // converts nullable to non-nullable, throws nullpointererror is null
     var client:OkHttpClient = OkHttpClient()
+
+    // urlencoding
+    val UTF8 = "UTF-8"
 
     /**
      * Returns the whole url to the current version of the API
@@ -77,13 +81,13 @@ class Server {
     fun getPillSearchUrl(name:String,imprint: String,color: String):String{
         var url = getPillEndpoint()
         if(!name.isEmpty()){
-            url += MEDICINE_NAME + name
+            url += MEDICINE_NAME + URLEncoder.encode(name, UTF8)
         }
         if(!imprint.isEmpty()){
-            url += IMPRINT + imprint
+            url += IMPRINT + URLEncoder.encode(imprint, UTF8)
         }
         if(!color.isEmpty()){
-            url += COLOR + color
+            url += COLOR + URLEncoder.encode(color, UTF8)
         }
         Log.i("Server:getPillSearchURL","URL Built: "+url)
         return url;
@@ -102,7 +106,7 @@ class Server {
                 .build()
         val response = client.newCall(request).execute()
 
-        return response.body()!!.string();
+        return response.body()!!.string()
     }
 
 }
