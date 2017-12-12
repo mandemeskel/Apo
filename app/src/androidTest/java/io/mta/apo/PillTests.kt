@@ -61,4 +61,18 @@ class PillTests {
         assertThat("clearSavedPills clears the pills table", saved_pills.isEmpty() == true)
     }
 
+    @Test
+    fun testSavePills() {
+        val num_new_pills = 5
+        val pills = Array<Pill>(num_new_pills, { id -> Pill(id, "", "", "", "")})
+        val old_pills = Pill.loadSavedPills(context)
+        Pill.savePills(pills, context)
+        val new_pills = Pill.loadSavedPills(context)
+
+        assertThat("savePills add new pills to the database", old_pills.size + num_new_pills == new_pills.size)
+
+        for( pill in pills )
+            assertThat("pills should be updated to show that they have been saved", pill.saved == true)
+    }
+
 }
