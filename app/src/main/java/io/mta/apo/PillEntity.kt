@@ -2,6 +2,8 @@ package io.mta.apo
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import java.text.DateFormat
+import java.util.*
 
 /**
  * This actual object that gets saved into the database, the properties are the column names and values.
@@ -19,5 +21,10 @@ class PillEntity(val brand_name: String, val medical_name: String, val img_path:
      */
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
+
+    /**
+     * The current date formatted for US locale with a MM.DD.YY HH:MMpm format. US locale for uniformity in the database regardless of where the user is.
+     */
+    val date_last_searched: String = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US).format(Date())
 
 }
