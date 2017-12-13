@@ -14,7 +14,7 @@ class PillJsonAdapterTest {
     val medical_name = "Diphenhydramine Citrate 38 MG / Ibuprofen 200 MG Oral Tablet [Advil PM]"
     val img_path = ""
     val description = "Ibuprofen 200 mg'\n'Diphenhydramine citrate 38 mg'\n"
-    val json = """{"pillID": ${pill_id}, "shape": "OVAL","rxString": "Diphenhydramine Citrate 38 MG / Ibuprofen 200 MG Oral Tablet [Advil PM]","medicine_name": "Advil PM","splimage": "","active_ingredient": ["Ibuprofen 200 mg", "Diphenhydramine citrate 38 mg"],"color": ["BLUE"],"imprint": ["Advil", "PM"]}"""
+    val json = """{"pillID": ${pill_id}, "shape": "OVA L","rxString": "Diphenhydramine Citrate 38 MG / Ibuprofen 200 MG Oral Tablet [Advil PM]","medicine_name": "Advil PM","splimage": "","active_ingredient": ["Ibuprofen 200 mg", "Diphenhydramine citrate 38 mg"],"color": ["BLUE"],"imprint": ["Advil", "PM"]}"""
     var pill: Pill? = null
 
     @Before

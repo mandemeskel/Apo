@@ -2,8 +2,9 @@ package io.mta.apo
 
 import com.squareup.moshi.*
 
+
 /**
- * Converts JSON into a pill object
+ * Converts JSON into pill objects
  *
  * @property IMG_URL the images of the pills are hosted at this server
  * @property IMG_EXTENSION all the images are jpgs
@@ -15,24 +16,51 @@ object PillJsonAdapter {
     val adapter = moshi.adapter(PillJsonAdapter.PillJson::class.java)
 
     /**
-     * Converts a json string into a pill object and does some formatting to img_path and description properties.
+     * Converts a json string into a pill object.
      *
      * @param json a json string
      * @return a pill object
      */
     fun fromJson(json: String): Pill {
         val pill_json = adapter.fromJson(json)
+        return convertToPill(pill_json!!)
+    }
+
+    /**
+     * Converts a json string array to an array of pills.
+     *
+     * @param json a json array string
+     * @return an array of pill objects
+     */
+    fun fromJsonArray(json: String): Array<Pill> {
+        val array_adapter = moshi.adapter(Array<PillJson>::class.java)
+        val jpills = array_adapter.fromJson(json) as Array<PillJson>
+        val pills = mutableListOf<Pill>()
+
+        jpills.map{ jpill -> pills.add(convertToPill(jpill))}
+
+        return pills.toTypedArray()
+    }
+
+    /**
+     * Converts a PillJson object to a Pill object, which mainly involves moving over values and formating img_path and description properties
+     *
+     * @param jpill a PillJson object
+     * @return a pill object
+     */
+    private fun convertToPill(jpill: PillJson): Pill {
         var img_path = ""
 
-        if(pill_json!!.img_path.isNotBlank())
-            img_path = IMG_URL + pill_json.img_path + IMG_EXTENSION
+        if(jpill.img_path.isNotBlank())
+            img_path = IMG_URL + jpill.img_path + IMG_EXTENSION
 
-        var description = pill_json.description.joinToString("\n")
+        var description = jpill.description.joinToString("\n")
 
         if(description.isBlank())
             description = ""
 
-        return Pill(pill_json.id, pill_json.brand_name, pill_json.medical_name, img_path, description)
+        return Pill(jpill.id, jpill.brand_name, jpill.medical_name, img_path, description)
+
     }
 
     /**

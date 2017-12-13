@@ -78,7 +78,7 @@ class Server {
      * @param {string} imprint - The imprint on the pill
      * @param {string} color - The color on the pill
      */
-    fun getPillSearchUrl(name:String,imprint: String,color: String):String{
+    fun getPillSearchUrl(name:String = "",imprint: String = "",color: String = ""):String{
         var url = getPillEndpoint()
         if(!name.isEmpty()){
             url += MEDICINE_NAME + URLEncoder.encode(name, UTF8)
@@ -98,7 +98,7 @@ class Server {
      * @param {string} imprint - The imprint on the pill
      * @param {string} color - The color on the pill
      */
-    fun queryServerPillOption(name:String, imprint:String, color:String):String{
+    fun queryServerPillOption(name:String = "", imprint:String = "", color:String = ""): Array<Pill>{
         Log.i("Server::queryPillServer","queryPillServer called")
 
         val request: Request = Request.Builder()
@@ -106,7 +106,8 @@ class Server {
                 .build()
         val response = client.newCall(request).execute()
 
-        return response.body()!!.string()
+        val json = response.body()!!.string()
+        return PillJsonAdapter.fromJsonArray(json)
     }
 
 }
