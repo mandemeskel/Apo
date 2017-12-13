@@ -64,7 +64,7 @@ class NavBarFragment: Fragment() {
 
     private fun btnCaptureClick() {
         if(currentActivity == MAIN_ACT)
-            // capture image
+            // TODO
         else {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)

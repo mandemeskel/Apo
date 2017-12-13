@@ -2,6 +2,7 @@ package io.mta.apo
 
 import android.arch.persistence.room.*
 import android.content.Context
+import android.util.Log
 
 /**
  * Created by Michael T. Andemeskel on 12/5/17.
@@ -100,6 +101,36 @@ class Pill (val id: Int, val brand_name: String, val medical_name: String, val i
             val db = initDb(context)
             db.insertPills(save_entities.toTypedArray())
             save_entities.clear()
+        }
+
+        var loaded_pills: Array<Pill> = emptyArray()
+        fun loadPills(context: Context) {
+            val thread = Thread(Runnable {
+                val db = initDb(context)
+                val entities = db.getAllPills()
+                loaded_pills = (entities.map { entity -> entityToPill(entity) }).toTypedArray()
+                Log.i("Pill", loaded_pills.size.toString())
+            } )
+            thread.start()
+        }
+
+        fun saveAllPills(context: Context) {
+            val thread = Thread(Runnable {
+                val db = initDb(context)
+                db.insertPills(save_entities.toTypedArray())
+                save_entities.clear()
+            } )
+            thread.start()
+        }
+
+        fun entityToPill(entity: PillEntity): Pill {
+            return Pill(
+                    entity.id,
+                    entity.brand_name,
+                    entity.medical_name,
+                    entity.img_path,
+                    entity.description
+            )
         }
 
     }
