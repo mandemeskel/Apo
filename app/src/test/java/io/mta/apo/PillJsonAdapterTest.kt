@@ -1,7 +1,5 @@
 package io.mta.apo
 
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
