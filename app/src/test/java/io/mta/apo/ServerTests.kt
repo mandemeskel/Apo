@@ -24,9 +24,7 @@ class ServerTests {    val server = Server()
 
     @Test
     fun queryServerPillOption() {
-        var url = server.getPillSearchUrl(pill_name, "", "")
-        System.out.println(url)
         val data = server.queryServerPillOption(pill_name, "", "")
-        assertThat("queryServerPillOption returns a JSON string", data is String)
+        assertThat("queryServerPillOption should return an array of pills", data is Array<Pill>)
     }
 }
