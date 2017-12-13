@@ -1,7 +1,6 @@
 package io.mta.apo
 
-import com.squareup.moshi.FromJson
-import com.squareup.moshi.Json
+import com.squareup.moshi.*
 
 /**
  * Converts JSON into a pill object
@@ -9,22 +8,31 @@ import com.squareup.moshi.Json
  * @property IMG_URL the images of the pills are hosted at this server
  * @property IMG_EXTENSION all the images are jpgs
  */
-class PillJsonAdapter {
+object PillJsonAdapter {
     val IMG_URL = "https://pillbox.nlm.nih.gov/assets/large/"
     val IMG_EXTENSION = ".jpg"
+    val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    val adapter = moshi.adapter(PillJsonAdapter.PillJson::class.java)
 
     /**
-     * Converts a PillJson into a proper pill object by doing some formatting to img_path and description properties.
+     * Converts a json string into a pill object and does some formatting to img_path and description properties.
      *
-     * @param json a PillJson object
+     * @param json a json string
      * @return a pill object
      */
-    @FromJson
-    fun fromJson(json: PillJson): Pill {
-        val img_path = IMG_URL + json.img_path + IMG_EXTENSION
-        val description = json.description.joinToString("\n")
+    fun fromJson(json: String): Pill {
+        val pill_json = adapter.fromJson(json)
+        var img_path = ""
 
-        return Pill(json.id, json.brand_name, json.medical_name, img_path, description)
+        if(pill_json!!.img_path.isNotBlank())
+            img_path = IMG_URL + pill_json.img_path + IMG_EXTENSION
+
+        var description = pill_json.description.joinToString("\n")
+
+        if(description.isBlank())
+            description = ""
+
+        return Pill(pill_json.id, pill_json.brand_name, pill_json.medical_name, img_path, description)
     }
 
     /**
