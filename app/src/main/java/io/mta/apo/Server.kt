@@ -81,10 +81,10 @@ class Server {
     fun getPillSearchUrl(name:String = "",imprint: String = "",color: String = ""):String{
         var url = getPillEndpoint()
         if(!name.isEmpty()){
-            url += MEDICINE_NAME + URLEncoder.encode(name, UTF8)
+            url += MEDICINE_NAME + URLEncoder.encode(name, UTF8) + "&"
         }
         if(!imprint.isEmpty()){
-            url += IMPRINT + URLEncoder.encode(imprint, UTF8)
+            url += IMPRINT + URLEncoder.encode(imprint, UTF8) + "&"
         }
         if(!color.isEmpty()){
             url += COLOR + URLEncoder.encode(color, UTF8)
